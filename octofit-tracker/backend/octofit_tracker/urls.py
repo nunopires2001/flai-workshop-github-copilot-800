@@ -50,11 +50,11 @@ def api_root(request, format=None):
         'message': 'Welcome to OctoFit Tracker API',
         'base_url': base_url,
         'endpoints': {
-            'users': request.build_absolute_uri(reverse('user-list')),
-            'teams': request.build_absolute_uri(reverse('team-list')),
-            'workouts': request.build_absolute_uri(reverse('workout-list')),
-            'activities': request.build_absolute_uri(reverse('activity-list')),
-            'leaderboard': request.build_absolute_uri(reverse('leaderboard-list')),
+            'users': f"{base_url}/api/users/",
+            'teams': f"{base_url}/api/teams/",
+            'workouts': f"{base_url}/api/workouts/",
+            'activities': f"{base_url}/api/activities/",
+            'leaderboard': f"{base_url}/api/leaderboard/",
         },
         'custom_actions': {
             'users_by_team': f"{base_url}/api/users/by_team/?team=Team%20Marvel",
