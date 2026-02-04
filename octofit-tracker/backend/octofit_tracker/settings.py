@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 if os.environ.get('CODESPACE_NAME'):
     ALLOWED_HOSTS.append(f"{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev")
+    ALLOWED_HOSTS.append(f"{os.environ.get('CODESPACE_NAME')}-3000.app.github.dev")
 
 
 # Application definition
@@ -96,6 +97,14 @@ DATABASES = {
 # CORS Configuration
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+# Configure CORS origins for Codespaces
+if os.environ.get('CODESPACE_NAME'):
+    CORS_ALLOWED_ORIGINS = [
+        f"https://{os.environ.get('CODESPACE_NAME')}-3000.app.github.dev",
+        f"https://{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev",
+    ]
+
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -115,6 +124,14 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# Additional CORS settings for Codespaces
+CSRF_TRUSTED_ORIGINS = []
+if os.environ.get('CODESPACE_NAME'):
+    CSRF_TRUSTED_ORIGINS = [
+        f"https://{os.environ.get('CODESPACE_NAME')}-3000.app.github.dev",
+        f"https://{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev",
+    ]
 
 
 # Password validation
